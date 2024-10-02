@@ -160,13 +160,19 @@ The indentation offset will be gotten from the first valid value
                          ((string-match-p "^utf-16-le" coding)
                           "utf-16le")
                          )))
-    ("trim_trailing_whitespace" . (if (or (memq 'delete-trailing-whitespace
+    ("trim_trailing_whitespace" . (if (or (symbol-value
+                                           editorconfig-trim-whitespaces-mode)
+
+                                          (memq 'delete-trailing-whitespace
                                                 before-save-hook)
                                           (memq 'delete-trailing-whitespace
                                                 write-file-functions)
                                           ;; There might be other hooks that
                                           ;; have this
-                                          )
+
+                                          ws-butler-mode
+                                          whitespace-cleanup-mode
+                                          trimspace-mode)
                                       "true"
                                     "false"))
     ("insert_final_newline" . (if require-final-newline
